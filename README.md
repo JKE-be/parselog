@@ -1,6 +1,9 @@
 # parselog
 Crappy parser sql log for Odoo
 
+## 0. Pre-config
+Dir /tmp/parselog created, with surge confgured if needed to publish online
+
 ## 1. APPLY THIS DIFF
 
 ```diff
@@ -32,5 +35,10 @@ _logger.debug("stack: " + "".join(['File: %r | line %d | %s | %s\n' % (filename,
 
 
 ## 3. Call SCRIPT
+url='/' && server='http://127.0.0.123:8069' && curl -s $server$url > /dev/null && echo "" > /tmp/log && curl -s $server$url > /dev/null && ~/src/private/parselog/parselog.py $url $online
 
-url='/' && server='http://127.0.0.123:8069' && curl $server$url && echo "" > /tmp/log && curl $server$url &&  ~/src/private/parselog/parselog.py $url
+### Publish Online with surge
+online='parselog-jke'
+
+### Local file
+unset online

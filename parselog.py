@@ -37,8 +37,10 @@
 
 from datetime import datetime
 import sys
-import tempfile
+#import tempfile
 import webbrowser
+import random
+import os
 
 
 def unfuck(myList):
@@ -143,9 +145,17 @@ def scrape_and_reformat():
 
 def main():
     h = scrape_and_reformat()
-    with tempfile.NamedTemporaryFile('w', delete=False, suffix='.html') as f:
+    rand = random.randrange(1000, 10000)
+    file = "log%s.html" % rand
+    # with tempfile.NamedTemporaryFile('w', delete=False, suffix='.html') as f:
+    with open('/tmp/parselog/%s' % file, 'w') as f:
         url = url = 'file://' + f.name
         f.write(h)
+
+    online = len(sys.argv) >= 3 and sys.argv[2]
+    if online:
+        os.system('surge /tmp/parselog/ %s.surge.sh' % online)
+        url = "https://parselog-jke.surge.sh/%s" % file
     webbrowser.open(url)
 
 
