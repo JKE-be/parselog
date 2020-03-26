@@ -121,7 +121,7 @@ def main():
     online = len(sys.argv) >= 3 and sys.argv[2]
     if online:
         os.system('surge /tmp/parselog/ %s.surge.sh' % online)
-        url = "https://parselog-jke.surge.sh/%s" % file
+        url = "https://%s.surge.sh/%s" % (online, file)
     webbrowser.open(url)
 
 
